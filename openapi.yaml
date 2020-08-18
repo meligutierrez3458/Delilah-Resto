@@ -1,0 +1,293 @@
+openapi: 3.0.2
+info:
+  title: API de Delilah Restó
+  description: 'Esta api permite crear usuarios, listar productos, hacer y listar pedidos, agregar, editar y eliminar productos'
+  version: 1.0.0
+servers:
+  - url: /localhost
+paths:
+  /usuario:
+    
+    post:
+      summary: Creacion de un usuario nuevo
+      description: Aqui podras crear un usuario
+      parameters:
+        - in: query
+          name: usuario
+          required: true
+          schema:
+            $ref: '#/components/schemas/usuario'
+      responses:
+        '201':
+          description: Se creo el usuario
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/usuario'
+                
+  '/usuario/{usuario}, {contrasena}':
+    get:
+      summary: Obtener usuario por usuario y contrasena
+      description: Aqui te damos un solo usuario
+      parameters:
+        - in: path
+          name: usuario
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: contrasena
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Todo bien
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/usuario'
+                
+    
+  /producto:
+    get:
+      summary: Se obtienen todos los productos
+      description: Lista de todos los productos ordenados alfabeticamente
+      responses:
+        '200':
+          description: Todo salio bien
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/producto'
+        '404':
+          description: No queremos darte resultados
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: number
+                    default: 404
+                  message:
+                    type: string
+        '500':
+          description: El servidor se cayo
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: number
+                    default: 500
+                  message:
+                    type: string
+    post:
+      summary: Creacion de un producto 
+      description: Aqui podras crear un producto
+      parameters:
+        - in: query
+          name: producto
+          required: true
+          schema:
+            $ref: '#/components/schemas/producto'
+      responses:
+        '201':
+          description: Se creó el producto
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/producto'
+                
+    put:
+      summary: Actualizar un producto existente
+      description: Aqui podras actualizar un producto
+      parameters:
+        - in: query
+          name: producto
+          required: true
+          schema:
+            $ref: '#/components/schemas/producto'
+      responses:
+        '201':
+          description: Se actualizó el producto
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/producto'
+                
+  /pedido:
+    get:
+      summary: Se obtienen todos los pedidos
+      description: Lista de todos los pedidos ordenados alfabeticamente
+      responses:
+        '200':
+          description: Todo salio bien
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/pedido'
+        '404':
+          description: No queremos darte resultados
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: number
+                    default: 404
+                  message:
+                    type: string
+        '500':
+          description: El servidor se cayo
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: number
+                    default: 500
+                  message:
+                    type: string
+    post:
+      summary: Creacion de un pedido 
+      description: Aqui podras crear un pedido
+      parameters:
+        - in: query
+          name: pedido
+          required: true
+          schema:
+            $ref: '#/components/schemas/pedido'
+      responses:
+        '201':
+          description: Se creo el pedido
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/pedido'
+                
+    put:
+      summary: Actualizar el estado de un pedido
+      description: Aqui podras actualizar el estado de un pedido
+      parameters:
+        - in: query
+          name: producto
+          required: true
+          schema:
+            $ref: '#/components/schemas/pedido'
+      responses:
+        '201':
+          description: Se actualizó el estado de el pedido
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/pedido'
+                
+   
+                
+  
+  '/pedido/{id}':
+    get:
+      summary: Obtener pedido por id
+      description: Aqui te damos un solo pedido
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: number
+            format: int64
+      responses:
+        '200':
+          description: Todo bien
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/pedido'
+    
+components:
+  schemas:
+    usuario:
+      type: object
+      properties:
+        id:
+          type: string
+        usuario:
+          type: string
+        contrasena:
+          type: string
+        nombre-apellido:
+          type: string
+        e-mail:
+          type: string
+        telefono:
+          type: string
+        direccion:
+          type: string
+       
+    producto:
+      type: object
+      properties:
+        id:
+          type: string
+        descripcion:
+          type: string
+        precio:
+          type: string
+          
+    pedido:
+      type: object
+      properties:
+        id:
+          type: string
+        estado:
+          $ref: '#/components/schemas/estado'
+        forma-pago:
+          $ref: '#/components/schemas/forma-pago'
+        usuario:
+          $ref: '#/components/schemas/usuario'
+        fecha-hora:
+          type: string
+          format: date
+        detalle-pedido:
+          type: array
+          items:
+            $ref: '#/components/schemas/detalle-pedido'
+            
+          
+          
+    estado:
+      type: object
+      properties:
+        id:
+          type: string
+        descripcion:
+          type: string
+          
+    forma-pago:
+      type: object
+      properties:
+        id:
+          type: string
+        descripcion:
+          type: string
+          
+    detalle-pedido:
+      type: object
+      properties:
+        pedido:
+          $ref: '#/components/schemas/pedido'
+        producto:
+          $ref: '#/components/schemas/producto'
+        valor-producto:
+          type: string
+        
+          
