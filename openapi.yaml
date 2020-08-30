@@ -119,6 +119,23 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/producto'
+
+    delete:
+      summary: Borrar un producto
+      description: Aqui podras borrar un producto por id
+      parameters:
+        - in: query
+          name: producto
+          required: true
+          schema:
+            $ref: '#/components/schemas/producto'
+      responses:
+        '201':
+          description: Se borró el producto
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/producto'
                 
   /pedido:
     get:
