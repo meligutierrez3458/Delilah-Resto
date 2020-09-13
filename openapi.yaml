@@ -24,8 +24,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/usuario'
-                
-  '/usuario/{usuario}, {contrasena}':
+
+  /datosUsuario:
     get:
       summary: Obtener usuario por usuario y contrasena
       description: Aqui te damos un solo usuario
@@ -46,7 +46,30 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/usuario'
+                $ref: '#/components/schemas/datosUsuario'
+                
+  '/login/{usuario}, {contrasena}':
+    post:
+      summary: Obtener los datos del usuario que esta en el sistema
+      description: Aqui te damos un solo usuario
+      parameters:
+        - in: path
+          name: usuario
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: contrasena
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Todo bien
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/login'
                 
     
   /producto:
@@ -208,27 +231,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/pedido'
                 
-   
-                
-  
-  '/pedido/{id}':
-    get:
-      summary: Obtener pedido por id
-      description: Aqui te damos un solo pedido
-      parameters:
-        - in: path
-          name: id
-          required: true
-          schema:
-            type: number
-            format: int64
-      responses:
-        '200':
-          description: Todo bien
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/pedido'
     
 components:
   schemas:
@@ -241,13 +243,15 @@ components:
           type: string
         contrasena:
           type: string
-        nombre-apellido:
+        nombre_apellido:
           type: string
-        e-mail:
+        e_mail:
           type: string
         telefono:
           type: string
         direccion:
+          type: string
+        es_admin:
           type: string
        
     producto:
@@ -279,23 +283,6 @@ components:
           items:
             $ref: '#/components/schemas/detalle-pedido'
             
-          
-          
-    estado:
-      type: object
-      properties:
-        id:
-          type: string
-        descripcion:
-          type: string
-          
-    forma-pago:
-      type: object
-      properties:
-        id:
-          type: string
-        descripcion:
-          type: string
           
     detalle-pedido:
       type: object

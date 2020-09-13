@@ -1,0 +1,44 @@
+{
+	"info": {
+		"_postman_id": "d6b176ce-1ae2-4f3e-b409-383b1427dfa6",
+		"name": "Actualizar estado de pedido",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Actualizar estado de pedido",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21icmUiOiJhZG1pbiIsImNvbnRyYXNlbmEiOiJhZG1pbiIsImFkbWluIjoiVCIsImlhdCI6MTYwMDAzNTQyN30.GufEquaZoYFEYITqHeN5OCnG6pvUjZGvomDiUWE6_hY",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\":\"12\",\r\n    \"estado\":\"CON\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/pedido",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"pedido"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

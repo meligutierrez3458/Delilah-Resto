@@ -1,0 +1,45 @@
+{
+	"info": {
+		"_postman_id": "9ef90c15-52f8-41fc-b136-0329bbe78311",
+		"name": "Crear producto",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:3000/producto",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21icmUiOiJxdWVlbl9mcmVkZGllIiwiY29udHJhc2VuYSI6InRlc3QiLCJpYXQiOjE1OTk4NjM5NTh9.zguQ2Iw365XeZkecPpz4cPK-XCF3rMO4vc-1H7NT7mY",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n{\r\n    \"descripcion\": \"Ensalada veggie\",\r\n    \"precio\":\"340\"\r\n} ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/producto",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"producto"
+					]
+				},
+				"description": "Post para crear producto"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
