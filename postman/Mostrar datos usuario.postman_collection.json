@@ -1,0 +1,35 @@
+{
+	"info": {
+		"_postman_id": "3eef8902-1f0b-4f64-a7aa-4ecdcd8868ee",
+		"name": "Mostrar datos usuario",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Mostar datos usuario",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21icmUiOiJhZG1pbiIsImNvbnRyYXNlbmEiOiJhZG1pbiIsImFkbWluIjoiVCIsImlhdCI6MTU5OTk0NDU2M30.sn64GjCp8rRFCBME_OhSbFcpbGQSHAMJPkAu0yiyHgc",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/datosUsuario",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"datosUsuario"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

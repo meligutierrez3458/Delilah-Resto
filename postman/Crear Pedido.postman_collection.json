@@ -1,0 +1,44 @@
+{
+	"info": {
+		"_postman_id": "53883b71-edcc-4007-b24e-c3dda74eae23",
+		"name": "Crear Pedido",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Crear Pedido",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21icmUiOiJhZG1pbiIsImNvbnRyYXNlbmEiOiJhZG1pbiIsImFkbWluIjoiVCIsImlhdCI6MTU5OTk0NDU2M30.sn64GjCp8rRFCBME_OhSbFcpbGQSHAMJPkAu0yiyHgc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"forma_de_pago\":\"E\",\r\n    \"id_usuario\":\"2\",\r\n    \"productos\":[\"1\",\"2\", \"3\"]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/crearPedido",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"crearPedido"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

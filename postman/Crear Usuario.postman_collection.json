@@ -1,0 +1,38 @@
+{
+	"info": {
+		"_postman_id": "f27ac95b-b6fd-4eed-a62c-d6278014d459",
+		"name": "Crear Usuario",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:3000/usuario",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n{\r\n    \"usuario\": \"admin\",\r\n    \"contrasena\":\"admin\",\r\n    \"nombre_apellido\": \"admin\",\r\n    \"e_mail\": \"admin@gmail.com\",\r\n    \"telefono\": \"+44 7712345678\",\r\n    \"direccion\": \"Logan 1, London 45\"\r\n} ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/usuario",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"usuario"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

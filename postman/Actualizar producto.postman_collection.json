@@ -1,0 +1,44 @@
+{
+	"info": {
+		"_postman_id": "a49828e1-93b1-4f5d-8b13-426c9fe4f6d9",
+		"name": "Actualizar producto",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "actualizar producto",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21icmUiOiJhZG1pbiIsImNvbnRyYXNlbmEiOiJhZG1pbiIsImFkbWluIjoiVCIsImlhdCI6MTU5OTk0MTE3OX0.BiL7ny7_2aXI0S-bGtSWWB4ZwZ1pregxaGEYLTm3EPM",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"4\",\r\n    \"precio\":\"600\"\r\n} ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/producto",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"producto"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

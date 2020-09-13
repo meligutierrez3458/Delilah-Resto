@@ -1,0 +1,35 @@
+{
+	"info": {
+		"_postman_id": "6b15a82f-c252-445a-96f3-93df84053e6d",
+		"name": "Mostrar Pedidos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Mostrar Pedidos",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21icmUiOiJxdWVlbl9mcmVkZGllIiwiY29udHJhc2VuYSI6InRlc3QiLCJhZG1pbiI6IkYiLCJpYXQiOjE2MDAwMzQ3MzV9.W2bR2IaKw68VNjbLpGmvl3YAozCbAUY6mNid9Jv9Q7k",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/pedido",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"pedido"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
