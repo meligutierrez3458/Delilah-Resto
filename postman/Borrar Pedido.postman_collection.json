@@ -1,0 +1,45 @@
+{
+	"info": {
+		"_postman_id": "eb012c34-ef3d-4696-a37c-d03777c7455a",
+		"name": "Borrar Pedido",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Borrar pedido",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer yJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21icmUiOiJhZG1pbiIsImNvbnRyYXNlbmEiOiJhZG1pbiIsImFkbWluIjoiVCIsImlhdCI6MTYwMDU0MjE4NX0.UwELpnU-h5iUKs7UOvB9O7jVakzqytluiJl7wEMVZsM",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n{\r\n    \"id\":14\r\n}  ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/pedido",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"pedido"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
