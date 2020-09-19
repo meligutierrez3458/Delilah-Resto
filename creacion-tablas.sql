@@ -27,5 +27,6 @@ CREATE TABLE pedido(
 CREATE TABLE detalle_pedido(
     id INT PRIMARY KEY AUTO_INCREMENT,
     id_pedido INT NOT NULL,
-    id_producto INT NOT NULL
+    id_producto INT NOT NULL,
+    cantidad_platos INT NOT NULL
 );

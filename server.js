@@ -56,7 +56,7 @@ async function crearProducto(descripcion, precio) {
 //Endpoint para crear un producto, ejecutado solamente por el admin
 server.post("/producto", esUnTokenValidoAdmin, async (req, res) => {
   const resultados = await crearProducto(req.body.descripcion, req.body.precio );
-  res.json(resultados);
+  res.json("EL producto ha sido creado correctamente");
 });
 
 //Borrar un producto
@@ -77,7 +77,7 @@ async function borrarProducto(id) {
 //Endpoint para borrar un producto, ejecutado solamente por el admin
 server.delete("/producto", esUnTokenValidoAdmin, async (req, res) => {
   const resultados = await borrarProducto(req.body.producto.id);
-  res.json(resultados);
+  res.json("Se borro el producto correctamente");
 });
 
 //Actualizar un producto
@@ -98,7 +98,7 @@ async function actualizarProducto(id, nuevoPrecio) {
 //Endpoint para actualizar el precio de un producto, ejecutado solamente por el admin
 server.put("/producto", esUnTokenValidoAdmin, async (req, res) => {
   const resultados = await actualizarProducto(req.body.id, req.body.precio);
-  res.json(resultados);
+  res.json("Precio del producto actualizado correctamente");
 });
 
 //Validar usuario en la base de datos y crea token
@@ -210,7 +210,7 @@ async function crearUsuario(usuario, contrasena, nombre_apellido, e_mail, telefo
 //Endpoint para crear un usuario
 server.post("/usuario", async (req, res) => {
   const resultados = await crearUsuario(req.body.usuario, req.body.contrasena, req.body.nombre_apellido, req.body.e_mail, req.body.telefono, req.body.direccion);
-  res.json(resultados);
+  res.json("Usuario creado correctamente");
 });
 
 //Validar TOKEN
@@ -230,17 +230,22 @@ function esUnTokenValido(req, res, next) {
 //Validar TOKEN Admin
 function esUnTokenValidoAdmin(req, res, next) {
   try {
-    const usuario = jwt.verify(
-      req.headers.authorization.split(" ")[1], 
-      CLAVE_CIFRADO_SERVER
-    );
-    console.log(usuario);
-    if (usuario.admin == "T"){
-      req.usuarioValidado = usuario;
-      next();
+    if(typeof req.headers.authorization === "undefined"){
+      res.status(400).json({ error: "Usuario no autorizado" }); 
+
     }else{
-      res.status(400).json({ error: e.message });
-    }
+      const usuario = jwt.verify(
+        req.headers.authorization.split(" ")[1], 
+        CLAVE_CIFRADO_SERVER
+      );
+      console.log(usuario);
+      if (usuario.admin == "T"){
+        req.usuarioValidado = usuario;
+        next();
+      }else{
+        res.status(400).json({ error: e.message });
+      }
+   }
     
   } catch (e) {
     res.status(400).json({ error: e.message });
@@ -253,7 +258,7 @@ async function crearPedidoCompleto(forma_de_pago, id_usuario, lista_producto) {
     const pedido = await crearPedido(forma_de_pago, id_usuario);
     lista_producto.forEach(function(element){
       console.log(element);
-      const detalle = crearDetallePedido(pedido[0], element);
+      const detalle = crearDetallePedido(pedido[0], element[0], element[1]);
       detalle.then(function(resultado){
         console.log(resultado);
         if (resultado) {
@@ -285,12 +290,12 @@ async function crearPedido(forma_de_pago, id_usuario) {
   }
 };
 
-async function crearDetallePedido(id_pedido, id_producto) {
+async function crearDetallePedido(id_pedido, id_producto, cantidad_platos) {
   try {
     const resultado = await conexion.query(
-      "INSERT INTO detalle_pedido VALUES (NULL, ?, ?)",
+      "INSERT INTO detalle_pedido VALUES (NULL, ?, ?, ?)",
       {
-        replacements: [id_pedido, id_producto],
+        replacements: [id_pedido, id_producto, cantidad_platos],
       }
     );
     console.log("crearDetallePedido");
@@ -304,7 +309,7 @@ async function crearDetallePedido(id_pedido, id_producto) {
 //Endpoint para crear pedido
 server.post("/crearPedido", esUnTokenValido, async (req, res) => {
   const resultados = await crearPedidoCompleto(req.body.forma_de_pago, req.body.id_usuario, req.body.productos );
-  res.json(resultados);
+  res.json("El pedido fué creado exitosamente");
 });
 
 //Mostrar todos los Pedidos
@@ -392,5 +397,41 @@ async function actualizarEstadoPedido(id, nuevoEstado) {
 //Posibles estados: NUE (Nuevo), CON (Confirmado), PRE (En preparacion), EC (En camini), ENV (Enviado), CAN(Cancelado)
 server.put("/pedido", esUnTokenValidoAdmin, async (req, res) => {
   const resultados = await actualizarEstadoPedido(req.body.id, req.body.estado);
-  res.json(resultados);
+  res.json("Estado actualizado correctamente");
+});
+
+//Borrar un pedido
+async function borrarDetallePedido(id_pedido) {
+  try {
+    const resultado = await conexion.query(
+      "DELETE FROM detalle_pedido WHERE id_pedido = :id_pedido",
+      {
+        replacements: {id_pedido: id_pedido},
+      }
+    );
+    console.log(resultado);
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+async function borrarPedido(id) {
+  try {
+    const resultado = await conexion.query(
+      "DELETE FROM pedido WHERE id = :id",
+      {
+        replacements: {id: id},
+      }
+    );
+    console.log(resultado);
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+//Endpoint para borrar un pedido, ejecutado solamente por el admin
+server.delete("/pedido", esUnTokenValidoAdmin, async (req, res) => {
+  await borrarDetallePedido(req.body.id);
+  await borrarPedido(req.body.id);
+  res.json("El pedido se eliminó correctamente");
 });
